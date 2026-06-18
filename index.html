@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开云 · 随行分享 | 轻量内容平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fdf2e9 0%, #fbe9d7 40%, #f4d9c4 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.2rem;
+            line-height: 1.6;
+            color: #2d2a24;
+        }
+
+        .page-card {
+            max-width: 880px;
+            width: 100%;
+            background: rgba(255, 253, 250, 0.92);
+            backdrop-filter: blur(4px);
+            border-radius: 48px 48px 32px 32px;
+            box-shadow: 0 12px 30px rgba(180, 130, 90, 0.14), 0 4px 10px rgba(0,0,0,0.03);
+            padding: 2.8rem 2.4rem 2.6rem;
+            transition: box-shadow 0.25s ease;
+        }
+
+        /* 杂志式横幅 —— 大标题 + 短说明 */
+        .hero {
+            text-align: center;
+            margin-bottom: 2.4rem;
+            padding-bottom: 1.8rem;
+            border-bottom: 1px solid #efe3d6;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 430;
+            letter-spacing: -0.02em;
+            color: #553c2b;
+            background: linear-gradient(135deg, #603f28, #7b5b3f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.6rem;
+            line-height: 1.2;
+        }
+
+        .hero .sub {
+            font-size: 1.15rem;
+            color: #6f5542;
+            font-weight: 380;
+            letter-spacing: 0.02em;
+            max-width: 580px;
+            margin: 0.4rem auto 0;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            margin-top: 0.8rem;
+            background: #dcc9b6;
+            color: #3f2e1f;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            backdrop-filter: blur(2px);
+        }
+
+        /* 三段自然介绍 + 混排 */
+        .feature-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2.2rem;
+            margin: 1.8rem 0 1.8rem;
+        }
+
+        .feature-item {
+            background: #fcf8f3;
+            border-radius: 28px;
+            padding: 1.8rem 2rem;
+            box-shadow: 0 1px 6px rgba(140, 100, 70, 0.06);
+            transition: background 0.2s;
+        }
+
+        .feature-item h2 {
+            font-size: 1.5rem;
+            font-weight: 420;
+            color: #4c3827;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-item p {
+            font-size: 1.02rem;
+            color: #3f3329;
+            margin-top: 0.3rem;
+        }
+
+        .feature-item .highlight-link {
+            display: inline-block;
+            margin-top: 0.6rem;
+            font-weight: 460;
+        }
+
+        .feature-item .highlight-link a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #7f5c3d;
+            background: #ede1d2;
+            padding: 0.2rem 1rem 0.25rem;
+            border-radius: 60px;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            border: 1px solid #e2d2c0;
+        }
+
+        .feature-item .highlight-link a:hover {
+            background: #dcc5ae;
+            color: #3d2d1d;
+            border-color: #b5987a;
+            box-shadow: 0 4px 8px rgba(130, 90, 55, 0.12);
+        }
+
+        .extra-note {
+            background: #f6efe6;
+            border-radius: 24px;
+            padding: 1.6rem 2rem;
+            margin: 1.2rem 0 0.6rem;
+        }
+
+        .extra-note p {
+            color: #3f3225;
+            font-size: 0.98rem;
+        }
+
+        .extra-note a {
+            color: #6c4e33;
+            text-decoration: underline;
+            text-decoration-color: #cbb295;
+            text-underline-offset: 3px;
+            font-weight: 460;
+        }
+
+        .extra-note a:hover {
+            color: #3c2b1b;
+            text-decoration-color: #8f6f50;
+        }
+
+        .faq-mini {
+            background: transparent;
+            margin: 1.6rem 0 0.4rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem 1.8rem;
+            padding: 0.2rem 0;
+        }
+
+        .faq-mini .qa {
+            flex: 1 1 180px;
+        }
+
+        .faq-mini .qa strong {
+            font-weight: 500;
+            color: #4b3624;
+            display: block;
+            font-size: 0.95rem;
+        }
+
+        .faq-mini .qa span {
+            font-size: 0.9rem;
+            color: #5a4a3a;
+        }
+
+        .footer-tip {
+            margin-top: 2rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid #e5d6c6;
+            text-align: center;
+            font-size: 0.95rem;
+            color: #6b5744;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.6rem 1.2rem;
+        }
+
+        .footer-tip a {
+            color: #4e3826;
+            font-weight: 480;
+            text-decoration: none;
+            border-bottom: 1px dashed #b2977e;
+            padding-bottom: 1px;
+        }
+
+        .footer-tip a:hover {
+            color: #2a1e13;
+            border-bottom-style: solid;
+        }
+
+        /* 响应式细节 */
+        @media (max-width: 640px) {
+            .page-card {
+                padding: 1.8rem 1.2rem;
+                border-radius: 32px;
+            }
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+            .feature-item {
+                padding: 1.4rem 1.2rem;
+            }
+            .feature-item h2 {
+                font-size: 1.3rem;
+            }
+            .extra-note {
+                padding: 1.2rem 1rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .hero .sub {
+                font-size: 1rem;
+            }
+            .faq-mini {
+                flex-direction: column;
+                gap: 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-card">
+        <!-- 首页横幅 -->
+        <div class="hero">
+            <h1>开云 · 随行分享</h1>
+            <p class="sub">轻量内容工具，旨在帮你在不同设备间快速传递文本与链接。<br>打开即用，无需注册，不追踪使用痕迹。</p>
+            <div class="badge">✨ 专注快速识别 · 纯净体验</div>
+        </div>
+
+        <!-- 三段自然介绍 + 背景说明 -->
+        <div class="feature-grid">
+            <div class="feature-item">
+                <h2>📋 剪贴板接力</h2>
+                <p>从手机复制一段地址或笔记，在电脑上打开 <span class="highlight-link"><a href="https://www.suishou-kaiyun.com.cn">开云</a></span> 就能立即获取。省去登录邮箱、反复发送的麻烦。</p>
+                <p style="margin-top:0.5rem; font-size:0.95rem; color:#5d4b38;">适合临时传递链接、短文案、会议号——用完即走。</p>
+            </div>
+
+            <div class="feature-item">
+                <h2>🧩 轻量设计，即开即用</h2>
+                <p>没有推送通知，没有用户系统。打开页面就是工作区，所有内容仅存在于当前会话。页面关闭后自动清空，不留痕迹。</p>
+                <p style="margin-top:0.6rem; color:#564432;">如果你经常需要在手机与电脑之间快速同步文本，<span class="highlight-link"><a href="https://www.suishou-kaiyun.com.cn">开云</a></span> 是一种接近零摩擦的选择。</p>
+            </div>
+
+            <div class="feature-item">
+                <h2>🌐 跨平台，不跨隐私</h2>
+                <p>无论是 macOS、Windows、iOS 还是 Android，只要浏览器版本较新就能使用。没有 App 需要下载，不收集任何个人标识。</p>
+                <p style="margin-top:0.4rem; color:#4d3b2b;">对于注重简洁和隐私的用户，这是一个随手可用的工具。</p>
+            </div>
+        </div>
+
+        <!-- 额外说明 / 背景补充 -->
+        <div class="extra-note">
+            <p><strong>为什么叫「开云」？</strong> 取“开启云上轻传”之意，不强调存储，更强调投递与读取的瞬时感。整个工具只做一件事：让信息在你自己的设备间流动。</p>
+            <p style="margin-top:0.6rem;">如果你希望了解具体如何开始，直接访问 <a href="https://www.suishou-kaiyun.com.cn">开云</a> 首页即可看到简洁的输入框与配对码。无需阅读长篇教程。</p>
+        </div>
+
+        <!-- FAQ 摘要 (杂志式) -->
+        <div class="faq-mini">
+            <div class="qa">
+                <strong>❓ 需要安装吗？</strong>
+                <span>完全不需要。纯浏览器端，无插件。</span>
+            </div>
+            <div class="qa">
+                <strong>❓ 内容安全吗？</strong>
+                <span>数据仅通过端到端加密传输，服务器不落盘。</span>
+            </div>
+            <div class="qa">
+                <strong>❓ 最大字符限制？</strong>
+                <span>单次建议不超过 5000 字符，无强制上限。</span>
+            </div>
+        </div>
+
+        <!-- 页尾访问提示 (自然嵌入链接) -->
+        <div class="footer-tip">
+            <span>📬 想尝试这种轻量分享方式？直接前往 <a href="https://www.suishou-kaiyun.com.cn">开云</a> 即可。</span>
+            <span style="opacity:0.7;">无需注册 · 即用即走</span>
+        </div>
+    </div>
+</body>
+</html>

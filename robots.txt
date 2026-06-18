@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://binamache.github.io/suishou-kaiyun-com-cn/sitemap.xml
